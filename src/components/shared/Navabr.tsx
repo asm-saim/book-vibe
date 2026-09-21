@@ -1,9 +1,15 @@
 import Image from "next/image";
 import React from "react";
 import logo from "@/assets/book.ico";
+import Link from "next/link";
 
 const Navbar = () => {
-  const navItems = ["Home", "Books", "Categories", "About"];
+  const navItems = [
+    { name: "Home", href: "/" },
+    { name: "Books", href: "/books" },
+    { name: "Categories", href: "/categories" },
+    { name: "About", href: "/about" },
+  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-xl">
@@ -28,15 +34,13 @@ const Navbar = () => {
         <nav className="hidden lg:block">
           <ul className="flex items-center gap-2">
             {navItems.map((item, index) => (
-              <li key={item}>
-                <a
-                  href="#"
-                  className={`rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                    index === 0 ? "bg-white/10 text-green-400" : "text-slate-400 hover:bg-white/5 hover:text-white"
-                  }`}
+              <li key={item.name}>
+                <Link
+                  href={item.href}
+                  className={`rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200  hover:bg-white/5 hover:text-white"}`}
                 >
-                  {item}
-                </a>
+                  {item.name}
+                </Link>
               </li>
             ))}
           </ul>
@@ -76,8 +80,10 @@ const Navbar = () => {
             className="menu dropdown-content z-50 mt-3 w-56 rounded-2xl border border-white/10 bg-slate-900 p-3 shadow-2xl"
           >
             {navItems.map((item) => (
-              <li key={item}>
-                <a className="rounded-lg text-slate-300 hover:bg-white/5 hover:text-green-400">{item}</a>
+              <li key={item.name}>
+                <Link href={item.href} className="rounded-lg text-slate-300 hover:bg-white/5 hover:text-green-400">
+                  {item.name}
+                </Link>
               </li>
             ))}
 

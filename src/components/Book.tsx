@@ -22,7 +22,7 @@ const Book = ({ book }: BookProps) => {
   return (
     <article className="group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-green-400/30 hover:shadow-2xl">
       {/* Book Image */}
-      <div className="relative h-56 overflow-hidden bg-slate-800">
+      <div className="relative h-48 overflow-hidden bg-slate-800">
         <Image
           src={book.image}
           alt={book.bookName}
@@ -90,7 +90,7 @@ const Book = ({ book }: BookProps) => {
           </div>
 
           <button className="rounded-lg bg-green-500 px-3 py-1.5 text-xs font-semibold text-slate-950 transition hover:bg-green-400">
-            Details
+            See Details
           </button>
         </div>
       </div>
