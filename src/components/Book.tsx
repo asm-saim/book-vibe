@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface IBook {
   bookId: number;
@@ -52,22 +53,15 @@ const Book = ({ book }: BookProps) => {
         </h2>
 
         {/* Author */}
-        <p className="mt-0.5 text-sm text-slate-400">
-          by {book.author}
-        </p>
+        <p className="mt-0.5 text-sm text-slate-400">by {book.author}</p>
 
         {/* Review */}
-        <p className="mt-3 line-clamp-2 text-sm leading-5 text-slate-400">
-          {book.review}
-        </p>
+        <p className="mt-3 line-clamp-2 text-sm leading-5 text-slate-400">{book.review}</p>
 
         {/* Tags */}
         <div className="mt-3 flex flex-wrap gap-1.5">
           {book.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-md bg-slate-800 px-2 py-0.5 text-xs font-medium text-slate-300"
-            >
+            <span key={tag} className="rounded-md bg-slate-800 px-2 py-0.5 text-xs font-medium text-slate-300">
               #{tag}
             </span>
           ))}
@@ -77,21 +71,19 @@ const Book = ({ book }: BookProps) => {
         <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
           <div>
             <p className="text-[11px] text-slate-500">Pages</p>
-            <p className="text-sm font-medium text-slate-300">
-              {book.totalPages}
-            </p>
+            <p className="text-sm font-medium text-slate-300">{book.totalPages}</p>
           </div>
 
           <div>
             <p className="text-[11px] text-slate-500">Published</p>
-            <p className="text-sm font-medium text-slate-300">
-              {book.yearOfPublishing}
-            </p>
+            <p className="text-sm font-medium text-slate-300">{book.yearOfPublishing}</p>
           </div>
 
-          <button className="rounded-lg bg-green-500 px-3 py-1.5 text-xs font-semibold text-slate-950 transition hover:bg-green-400">
-            See Details
-          </button>
+          <Link href={`/books/${book.bookId}`}>
+            <button className="rounded-lg bg-green-500 px-3 py-1.5 text-xs font-semibold text-slate-950 transition hover:bg-green-400">
+              See Details
+            </button>
+          </Link>
         </div>
       </div>
     </article>

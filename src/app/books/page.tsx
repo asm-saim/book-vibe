@@ -1,4 +1,5 @@
 import Book from "@/components/Book";
+import { IBook } from "@/types/types";
 
 // FETCHING DATA
 const getBooks = async () => {
@@ -31,7 +32,7 @@ const Books = async () => {
 
       {/* Books Grid */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {books.map((book) => (
+        {books.map((book:IBook) => (
           <Book key={book.bookId} book={book} />
         ))}
       </div>
