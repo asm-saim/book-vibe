@@ -30,7 +30,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex gap-2 items-center">
-          <Image src={logo} width={40} height={40}></Image>
+          <Image src={logo} width={40} height={40} alt=" logo image"></Image>
           <p className="font-bold text-xl">Book Vibe</p>
         </div>
       </div>
