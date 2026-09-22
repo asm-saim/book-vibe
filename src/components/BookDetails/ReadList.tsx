@@ -14,7 +14,7 @@ const ReadList = ({ book }: IBookProps) => {
 
   const handleReadList = () => {
     // console.log("readList is clicked", book);
-    setReadList([...readList], book);
+    setReadList(...readList, book);
   };
   return (
     <div>
