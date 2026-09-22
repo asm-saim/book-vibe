@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IBook } from "@/types/types";
+import ReadList from "@/components/BookDetails/ReadList";
 
 const getBooks = async (): Promise<IBook[]> => {
   const res = await fetch("http://localhost:3001/books");
@@ -133,13 +134,11 @@ const BookDetailPage = async ({ params }: { params: Promise<{ id: string }> }) =
 
             {/* Actions */}
             <div className="mt-4 flex flex-wrap gap-3 pb-1">
-              <button className="rounded-lg bg-green-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-green-500/10 transition hover:bg-green-400">
+              <ReadList book={book}></ReadList>
+
+              <button className="rounded-lg border border-green-500/40 bg-slate-800 px-5 py-2.5 text-sm font-semibold text-green-400 transition hover:border-green-400 hover:bg-slate-700 cursor-pointer">
                 {" "}
                 Add to Wishlist{" "}
-              </button>
-              <button className="rounded-lg border border-green-500/40 bg-slate-800 px-5 py-2.5 text-sm font-semibold text-green-400 transition hover:border-green-400 hover:bg-slate-700">
-                {" "}
-                Mark as Read{" "}
               </button>
             </div>
           </div>
