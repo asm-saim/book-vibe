@@ -3,6 +3,7 @@
 import { BookContext } from "@/context/BookContext";
 import { IBook } from "@/types/types";
 import { useContext } from "react";
+import { Bounce, toast } from "react-toastify";
 
 interface IBookProps {
   book: IBook;
@@ -14,7 +15,20 @@ const ReadList = ({ book }: IBookProps) => {
 
   const handleReadList = () => {
     // console.log("readList is clicked", book);
-    setReadList(...readList, book);
+    setReadList([...readList, book]);
+    
+    //toastify:
+    toast.success(`${book.bookName} successfully added to Read List!`, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
   };
   return (
     <div>
