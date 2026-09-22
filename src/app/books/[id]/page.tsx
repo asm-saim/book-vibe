@@ -50,7 +50,7 @@ const BookDetailPage = async ({ params }: { params: Promise<{ id: string }> }) =
 
       {/* Main Detail Card */}
       <section className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl lg:h-[75vh]">
-        <div className="grid h-full grid-cols-1 lg:grid-cols-5">
+        <div className="grid h-full grid-cols-1 lg:grid-cols-6">
           {/* Book Cover */}
           <div className="relative min-h-[300px] bg-slate-950 lg:col-span-2 lg:min-h-0">
             <Image src={book.image} alt={book.bookName} fill priority className="object-cover" />
@@ -65,7 +65,7 @@ const BookDetailPage = async ({ params }: { params: Promise<{ id: string }> }) =
           </div>
 
           {/* Details */}
-          <div className="flex min-h-0 flex-col overflow-y-auto p-5 sm:p-6 lg:col-span-3 lg:p-7">
+          <div className="flex min-h-0 flex-col overflow-y-auto p-5 sm:p-6 lg:col-span-4 lg:p-7">
             {/* Heading */}
             <div>
               <p className="text-xs font-medium uppercase tracking-wider text-green-400">Book Details</p>

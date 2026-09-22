@@ -80,8 +80,8 @@ const Book = ({ book }: BookProps) => {
           </div>
 
           <Link href={`/books/${book.bookId}`}>
-            <button className="rounded-lg bg-green-500 px-3 py-1.5 text-xs font-semibold text-slate-950 transition hover:bg-green-400">
-              See Details
+            <button className="rounded-lg bg-green-500 px-3 py-1.5 text-sm font-semibold text-slate-950 transition hover:bg-green-400">
+              See Details ⮞
             </button>
           </Link>
         </div>
