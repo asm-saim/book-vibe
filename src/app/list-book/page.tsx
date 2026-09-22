@@ -1,13 +1,32 @@
 "use client";
 
+import LibraryCard from "@/components/shared/LibratyCard";
 import { BookContext } from "@/context/BookContext";
 import { IBook } from "@/types/types";
-import Image from "next/image";
-import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const ReadList = () => {
   const { readList, wishList } = useContext(BookContext);
+
+  const [sortType, setSortType] = useState<"rating" | "year" | "pages">("rating");
+
+  //for sort section:
+  const sortBooks = (books: IBook[]) => {
+    const sortedBooks = [...books];
+
+    if (sortType === "rating") {
+      sortedBooks.sort((a, b) => b.rating - a.rating);
+    } else if (sortType === "year") {
+      sortedBooks.sort((a, b) => b.yearOfPublishing - a.yearOfPublishing);
+    } else if (sortType === "pages") {
+      sortedBooks.sort((a, b) => b.totalPages - a.totalPages);
+    }
+
+    return sortedBooks;
+  };
+
+  const sortedReadList = sortBooks(readList);
+  const sortedWishList = sortBooks(wishList);
 
   return (
     <section className="min-h-screen bg-slate-950 px-4 py-10 sm:px-6 lg:px-8">
@@ -23,6 +42,28 @@ const ReadList = () => {
           <p className="mt-2 text-sm text-slate-400">Manage the books you have read and the books you want to read.</p>
         </div>
 
+        {/* Sort Section */}
+        <div className="mb-5 flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold text-white">Organize your collection</p>
+            <p className="mt-1 text-xs text-slate-500">Choose how you want to arrange your books.</p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="hidden text-xs font-medium uppercase tracking-wider text-slate-500 sm:block">Sort by</span>
+
+            <select
+              value={sortType}
+              onChange={(e) => setSortType(e.target.value as "rating" | "year" | "pages")}
+              className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm font-medium text-slate-200 outline-none transition focus:border-green-400 focus:ring-1 focus:ring-green-400 sm:w-44"
+            >
+              <option value="rating">Highest Rating</option>
+              <option value="year">Newest Published</option>
+              <option value="pages">Most Pages</option>
+            </select>
+          </div>
+        </div>
+
         {/* Tabs */}
         <div className="tabs tabs-lift w-full">
           {/* Read List */}
@@ -35,9 +76,9 @@ const ReadList = () => {
           />
 
           <div className="tab-content border-slate-800 bg-slate-900 p-4 sm:p-5">
-            {readList.length > 0 ? (
+            {sortedReadList.length > 0 ? (
               <div className="space-y-4">
-                {readList.map((book: IBook) => (
+                {sortedReadList.map((book: IBook) => (
                   <LibraryCard key={book.bookId} book={book} />
                 ))}
               </div>
@@ -52,7 +93,7 @@ const ReadList = () => {
           <div className="tab-content border-slate-800 bg-slate-900 p-4 sm:p-5">
             {wishList.length > 0 ? (
               <div className="space-y-4">
-                {wishList.map((book: IBook) => (
+                {sortedWishList.map((book: IBook) => (
                   <LibraryCard key={book.bookId} book={book} />
                 ))}
               </div>
@@ -63,54 +104,6 @@ const ReadList = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-const LibraryCard = ({ book }: { book: IBook }) => {
-  return (
-    <article className="group flex min-h-40 overflow-hidden rounded-xl border border-slate-800 bg-slate-950 transition duration-300 hover:border-green-400/40">
-      {/* Image */}
-      <div className="relative h-48 w-32 shrink-0 sm:h-48 sm:w-36">
-        <Image src={book.image} fill alt={book.bookName} className="object-cover" />
-      </div>
-
-      {/* Content */}
-      <div className="flex flex-1 flex-col justify-between p-4">
-        <div>
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h2 className="line-clamp-1 text-lg font-bold text-white transition group-hover:text-green-400">
-                {book.bookName}
-              </h2>
-
-              <p className="mt-0.5 text-sm text-slate-400">by {book.author}</p>
-            </div>
-
-            <span className="shrink-0 rounded-full bg-green-400/10 px-2.5 py-1 text-xs font-medium text-green-400">
-              {book.category}
-            </span>
-          </div>
-
-          <p className="mt-2 line-clamp-2 text-sm leading-5 text-slate-400">{book.review}</p>
-        </div>
-
-        {/* Bottom Info */}
-        <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-3">
-          <div className="flex items-center gap-4 text-xs">
-            <span className="text-yellow-400">★ {book.rating}</span>
-
-            <span className="text-slate-400">{book.totalPages} pages</span>
-
-            <span className="hidden text-slate-500 sm:inline">{book.yearOfPublishing}</span>
-          </div>
-          <Link href={`/books/${book.bookId}`}>
-            <button className="rounded-lg bg-green-500 px-3 py-1.5 text-sm font-semibold text-slate-950 transition hover:bg-green-400">
-              Details ⮞
-            </button>
-          </Link>
-        </div>
-      </div>
-    </article>
   );
 };
 
