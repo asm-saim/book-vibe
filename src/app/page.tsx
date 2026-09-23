@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div>
+    <div className="bg-slate-950">
       <Banner></Banner>
       <Books></Books>
     </div>
