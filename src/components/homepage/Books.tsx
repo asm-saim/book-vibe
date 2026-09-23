@@ -3,20 +3,25 @@ import Book from "../Book";
 
 // FETCHING DATA
 const getBooks = async () => {
-  const res = await fetch("http://localhost:3001/books");
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/books`);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    if (!res.ok) {
+      throw new Error("Failed to fetch books");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error("Error Fetching Books Data", error);
+    return [];
   }
-
-  return res.json();
 };
 
 const Books = async () => {
   const books = await getBooks();
 
   return (
-    <section className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <section className="mx-auto w-full max-w-6xl px-4 py-8 mb-10 sm:px-6 lg:px-8">
       {/* Section Heading */}
       <div className="mb-8 mt-5 text-center">
         <p className="text-sm font-medium uppercase tracking-wider text-green-400">Explore the collection</p>
@@ -32,7 +37,7 @@ const Books = async () => {
 
       {/* Books Grid */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {books.slice(0, 6).map((book:IBook) => (
+        {books.slice(0, 6).map((book: IBook) => (
           <Book key={book.bookId} book={book} />
         ))}
       </div>

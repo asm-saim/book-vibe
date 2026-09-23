@@ -5,13 +5,18 @@ import ReadList from "@/components/BookDetails/ReadList";
 import WishList from "@/components/BookDetails/WishList";
 
 const getBooks = async (): Promise<IBook[]> => {
-  const res = await fetch("http://localhost:3001/books");
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/books`);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    if (!res.ok) {
+      throw new Error("Failed to fetch books");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error("Error Fetching Books Data", error);
+    return [];
   }
-
-  return res.json();
 };
 
 const BookDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {

@@ -5,7 +5,7 @@ import bannerImg from "@/assets/hero_img.jpg";
 const Banner = () => {
   return (
     <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 px-8 py-12 shadow-2xl sm:px-12 lg:px-8 lg:py-8 my-7">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 px-8 py-12 shadow-2xl sm:px-12 lg:px-8 lg:py-8 my-8">
         {/* Decorative glow */}
         <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-green-500/10 blur-3xl" />
         <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />

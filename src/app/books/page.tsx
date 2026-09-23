@@ -3,13 +3,18 @@ import { IBook } from "@/types/types";
 
 // FETCHING DATA
 const getBooks = async () => {
-  const res = await fetch("http://localhost:3001/books");
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/books`);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    if (!res.ok) {
+      throw new Error("Failed to fetch books");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error("Error Fetching Books Data", error);
+    return [];
   }
-
-  return res.json();
 };
 
 const Books = async () => {
@@ -17,7 +22,7 @@ const Books = async () => {
 
   return (
     <div className="bg-slate-950">
-      <section className="mx-auto w-full max-w-6xl  px-4 py-8 sm:px-6 lg:px-8">
+      <section className="mx-auto w-full max-w-6xl  px-4 py-8 mb-10 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <div className="mb-8 mt-5 text-center">
           <p className="text-sm font-medium uppercase tracking-wider text-green-400">Explore the collection</p>
