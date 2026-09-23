@@ -4,7 +4,7 @@ import Book from "../Book";
 // FETCHING DATA
 const getBooks = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/books`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/books.json`);
     const data = await res.json();
     if (!res.ok) {
       throw new Error("Failed to fetch books");
