@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import bannerImg from "@/assets/hero_img.jpg";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -18,18 +19,17 @@ const Banner = () => {
             </span>
 
             <h1 className="max-w-xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Books to freshen up your{" "}
-              <span className="text-green-400">bookshelf.</span>
+              Books to freshen up your <span className="text-green-400">bookshelf.</span>
             </h1>
 
             <p className="mt-6 max-w-lg text-base leading-7 text-slate-400 sm:text-lg">
-              Discover your next favorite book and build a collection worth
-              coming back to.
+              Discover your next favorite book and build a collection worth coming back to.
             </p>
-
-            <button className="btn mt-8 border-none bg-green-500 px-7 text-base font-semibold text-slate-950 shadow-lg shadow-green-500/20 transition-all duration-300 hover:bg-green-400 hover:shadow-green-500/30">
-              View The List
-            </button>
+            <Link href="/books">
+              <button className="btn mt-8 border-none bg-green-500 px-7 text-base font-semibold text-slate-950 shadow-lg shadow-green-500/20 transition-all duration-300 hover:bg-green-400 hover:shadow-green-500/30">
+                View The List
+              </button>
+            </Link>
           </div>
 
           {/* Image */}
